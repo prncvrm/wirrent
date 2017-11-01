@@ -254,3 +254,7 @@ var am_active = schedule.scheduleJob('*/5 * * * * *', function(){
 		
 	});
 });
+//adding mutual friends after every 30 secs
+var mutual_friend=schedule.scheduleJob('*/30 * * * * *',function(){
+	func.add_mutal_friend();
+})

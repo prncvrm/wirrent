@@ -105,10 +105,11 @@ exports.add_mutal_friend=function (){
 				var _ip=data[i].ip;
 				http.get({hostname:_ip,port:3000,path:'/friend_list',agent:false},function(res,err){
 					res.on("data",function(chunk){
-						//console.log(JSON.parse(chunk));
 						//parsing response to json
 						chunk = JSON.parse(chunk);
-						for (var j=0;j<chunk.length;j++){
+						setup.find().toArray(function(er,_dt){
+							_my_name=_dt[0].name;
+							for (var j=0;j<chunk.length;j++){
 							if(chunk[j].name != _my_name)
 								friends.find({"name":chunk[j].name}).toArray(function(err,_data){
 									//recheck here
@@ -117,7 +118,8 @@ exports.add_mutal_friend=function (){
 										console.log("mutal friend added");
 									}
 								});
-						}
+							}
+						});
 					});
 					
 				}).on("error",function(err){
