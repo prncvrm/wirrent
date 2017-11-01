@@ -97,6 +97,9 @@ exports.update_active_friends=function (){
 			}
 		});		
 }
+exports.test=function(){
+	console.log("test");
+}
 exports.add_mutal_friend=function (){
 	friends.find().toArray(function(err,data){
 			if(err)
@@ -110,14 +113,20 @@ exports.add_mutal_friend=function (){
 						setup.find().toArray(function(er,_dt){
 							_my_name=_dt[0].name;
 							for (var j=0;j<chunk.length;j++){
-							if(chunk[j].name != _my_name)
-								friends.find({"name":chunk[j].name}).toArray(function(err,_data){
+							if(chunk[j].name != _my_name){
+								var temp=chunk[j];
+								friends.find({"name":temp.name}).toArray(function(err,_data){
+									//console.log(temp.time);
 									//recheck here
-									if(data==null || chunk[j].time>_data[0].time ){
-										add_friend(chunk[j].ip,chunk[j].name,1);
+									if(data==null || temp.time>_data[0].time ){
+										friends.updateOne({'name':temp.name},{'name':temp.name,'ip':temp.ip,'chance':1,'time':Date.now()},{upsert:true});
+										if(err)
+											console.log(err);
+//										this.add_friend(temp.ip,temp.name,1);
 										console.log("mutal friend added");
 									}
 								});
+							}
 							}
 						});
 					});
@@ -125,7 +134,7 @@ exports.add_mutal_friend=function (){
 				}).on("error",function(err){
 						console.log(_ip+" is dead at the moment to add mutual friends");
 					});
-		}
+			}
 		});
 }
 function search_files(result,filter,path,_ip){
