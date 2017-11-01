@@ -56,22 +56,33 @@ app.get("*",function(req,res,next){
 //nav bar
 app.get('/api/stats',function(req,res){
 	setup.find().toArray(function(err,data){
-	var _my_name,ip,path,_friends;
+	var _my_name,ip,path,_friends=[];
 	if (data.length>0){
 		_my_name=data[0].name;	
 		ip=data[0].my_ip;
 		path=data[0].path;
+		var counter=0;
 		active_friends.find().toArray(function(err,_data){
-			_friends=data;
+			_data.forEach(function(elt,index){
+				friends.find({"ip":elt.ip}).toArray(function(err,_dt){
+					_friends.push({"ip":elt.ip,"name":_dt[0].name});
+					counter++;
+					if(_data.length==counter)
+					{
+						res.json({
+						my_name:_my_name,
+						my_ip:ip,
+						paths:path,
+						cur_ip:_my_ip(),
+						friends:_friends,
+						});
+					}
+				});
+			});
+		
 		});
 	}
-	res.json({
-		my_name:_my_name,
-		my_ip:ip,
-		paths:path,
-		cur_ip:_my_ip(),
-		friends:_friends,
-	});
+
 	});
 
 });
