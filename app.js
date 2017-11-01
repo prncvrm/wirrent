@@ -63,6 +63,15 @@ app.get('/api/stats',function(req,res){
 		path=data[0].path;
 		var counter=0;
 		active_friends.find().toArray(function(err,_data){
+			if(_data.length==0){
+				res.json({
+						my_name:_my_name,
+						my_ip:ip,
+						paths:path,
+						cur_ip:_my_ip(),
+						friends:_friends,
+						});
+			}
 			_data.forEach(function(elt,index){
 				friends.find({"ip":elt.ip}).toArray(function(err,_dt){
 					_friends.push({"ip":elt.ip,"name":_dt[0].name});
