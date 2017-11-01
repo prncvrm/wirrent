@@ -118,7 +118,7 @@ exports.add_mutal_friend=function (){
 								friends.find({"name":temp.name}).toArray(function(err,_data){
 									//console.log(temp.time);
 									//recheck here
-									if(data==null || temp.time>_data[0].time ){
+									if(_data==0 || temp.time>_data[0].time ){
 										friends.updateOne({'name':temp.name},{'name':temp.name,'ip':temp.ip,'chance':1,'time':Date.now()},{upsert:true});
 										if(err)
 											console.log(err);
