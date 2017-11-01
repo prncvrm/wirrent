@@ -1,0 +1,21 @@
+<% include navs/header.ejs %>
+
+<div class="row">
+  <form class="col s12" method="POST" action="/add_friend">
+    <div class="row">
+      <div class="input-field col s6">
+        <input name="ip" type="text" class="validate">
+        <label for="Ip Address">Ip Address</label>
+      </div>
+      <div class="input-field col s6">
+        <input name="name" type="text" class="validate">
+        <label for="name">Name</label>
+      </div>
+    </div>
+    <div class="row">
+      <button class="waves-effect waves-light btn" id="submit" value="submit" type="submit" >Submit</button>
+    </div>
+  </form>
+</div>
+<% include navs/footer.ejs %>
+
