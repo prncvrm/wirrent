@@ -4,12 +4,16 @@
   <form class="col s6" method="POST" action="/setup">
     <div class="row" id="row_append">
       <div class="input-field col s12">
-        <input name="name" type="text" class="validate">
-        <label for="College id">College Id (eg:prince.1510106)</label>
+        <input name="name" type="text" class="validate" required>
+        <label for="College id" data-error="Please enter your college_id.">College Id (eg:prince.1510106)</label>
       </div>
-      <div class="input-field col s12" id="duplicate">
-        <input name="path" type="text" class="validate">
-        <label for="Enter 1st path">Path(eg:D:/Movies/ or D:/)</label>
+      <div class="input-field col s12" id="duplicate" >
+        <input name="path" type="text" class="validate" required>
+        <label for="path" data-error="Required." >Path(eg:D:/Movies/ or D:/)</label>
+      </div>
+      <div class="input-field col s12" id="duplicate" >
+        <input name="path" type="text" class="validate" required>
+        <label for="path" data-error="Required." >Path(eg:D:/Movies/ or D:/)</label>
       </div>
     </div>
     <div class="row">
