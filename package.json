@@ -18,7 +18,8 @@
     "atob": "*",
     "mongojs": "*",
     "asyn":"*",
-    "ejs":"*"
+    "ejs":"*",
+    "request":"*"
   },
   "devDependencies": {},
   "scripts": {
