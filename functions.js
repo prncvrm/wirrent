@@ -97,9 +97,6 @@ exports.update_active_friends=function (){
 			}
 		});		
 }
-exports.test=function(){
-	console.log("test");
-}
 exports.add_mutal_friend=function (){
 	friends.find().toArray(function(err,data){
 			if(err)

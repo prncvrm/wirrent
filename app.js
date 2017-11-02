@@ -96,7 +96,7 @@ app.get('/api/stats',function(req,res){
 
 });
 
-app.get('/friend_list',function(req,res){
+/*app.get('/friend_list',function(req,res){
 		db.collection('friends',function(err,collection){
 		collection.find().toArray(function(err,data){
 			if (err)
@@ -105,7 +105,7 @@ app.get('/friend_list',function(req,res){
 		res.status(200).send(data);
 		});
 	});
-});
+});*/
 app.get('/add_mutal_friend',function(req,res){
 	func.add_mutal_friend();
 	res.writeHead(200,{'Context-Type':'text/plain'});
@@ -134,7 +134,7 @@ app.get('/add_found_friends',function(req,res){
 		collection.find().toArray(function(err,data){
 			if(err)
 				return console.log(err);
-			console.log(data[ip]);
+			//console.log(data[ip]);
 		});
 	});
 });
@@ -180,6 +180,15 @@ app.get('/search',function(req,res){
 	
 });
 
+app.get('/my_friends',function(req,res){
+	friends.find().toArray(function(err,_data){
+		console.log(JSON.stringify(_data));
+		res.render('my_friends',{data:"(JSON.stringify(_data))"});
+	});
+	
+	
+});
+
 app.post('/search',urlencodedParser,function(req,res){
 	func.search_all(req.body.query,function(result,err){
 
@@ -199,7 +208,7 @@ app.get('/setup',function(req,res){
 
 });
 app.post('/setup',urlencodedParser,function(req,res){
-	console.log(req.body);
+	//console.log(req.body);
 	setup.updateOne({'name':req.body.name},{'name':req.body.name,'my_ip':_my_ip(),'path':req.body.path},{upsert:true});
 	res.render('setup',{toast:"Restart the Application"});
 });
