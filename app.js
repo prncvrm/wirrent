@@ -96,7 +96,7 @@ app.get('/api/stats',function(req,res){
 
 });
 
-/*app.get('/friend_list',function(req,res){
+app.get('/friend_list',function(req,res){
 		db.collection('friends',function(err,collection){
 		collection.find().toArray(function(err,data){
 			if (err)
@@ -105,7 +105,7 @@ app.get('/api/stats',function(req,res){
 		res.status(200).send(data);
 		});
 	});
-});*/
+});
 app.get('/add_mutal_friend',function(req,res){
 	func.add_mutal_friend();
 	res.writeHead(200,{'Context-Type':'text/plain'});
