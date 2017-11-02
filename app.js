@@ -101,7 +101,7 @@ app.get('/friend_list',function(req,res){
 		collection.find().toArray(function(err,data){
 			if (err)
 				return console.log(err);
-			console.log(data);
+			//console.log(data);
 		res.status(200).send(data);
 		});
 	});
@@ -183,7 +183,7 @@ app.get('/search',function(req,res){
 app.get('/my_friends',function(req,res){
 	friends.find().toArray(function(err,_data){
 		console.log(JSON.stringify(_data));
-		res.render('my_friends',{data:"(JSON.stringify(_data))"});
+		res.render('my_friends',{data:(_data)});
 	});
 	
 	
