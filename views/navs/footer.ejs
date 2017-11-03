@@ -1,9 +1,9 @@
 
 <style>
 .container1 {
-  
  width:100%;
   position:absolute;
+  top:15%;
   
 }
 
@@ -37,6 +37,7 @@ html, body {
     </div>
   </div>
 </div>
+</body>
 <footer class="page-footer" style="position:fixed;bottom:0;width:100%;font-size:11px;padding:0px">
   <div class="container">
     <div class="row">
@@ -65,9 +66,7 @@ html, body {
     <a class="grey-text text-lighten-4" >Issues? ping @ <a href="mailto:prncvrm.work@gmail.com">prncvrm.work@gmail.com</a></a>
     </div>
   </div>
-</footer>  
-
-      <!--Import jQuery before materialize.js-->
+  <!--Import jQuery before materialize.js-->
       <script type="text/javascript" src="/assets/js/jquery-3.2.1.min.js"></script>
      <script src="/assets/js/materialize.min.js"></script>
      <script>
@@ -94,5 +93,8 @@ html, body {
     
 </script>  
   <%if (typeof(toast)!='undefined') {%>  <script> Materialize.toast('<%=toast%>', 4000);</script>  <%}%>
-    </body>
+</footer>  
+
+      
+    
   </html>
