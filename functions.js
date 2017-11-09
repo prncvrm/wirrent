@@ -135,18 +135,20 @@ exports.add_mutal_friend=function (){
 		});
 }
 function search_files(result,filter,path,_ip){
-	var files=fs.readdirSync(path);
-    for(var i=0;i<files.length;i++){
-       	var filename=_path.join(path,files[i]);
-       	var stat = fs.lstatSync(filename);
-    	//recurse here
-    	if (stat.isDirectory()){
-        	search_files(result,filter,filename,_ip); //recurse
-       	}
-       	if ((filename.split("/")[filename.split("/").length-1]).toLowerCase().indexOf(filter.toLowerCase())>=0 && !stat.isDirectory()) {
-       		result.push({'ip':_ip,'path':filename});
-       	};
-    }
+	if(fs.exitsSync(path)){
+		var files=fs.readdirSync(path);
+	    for(var i=0;i<files.length;i++){
+	       	var filename=_path.join(path,files[i]);
+	       	var stat = fs.lstatSync(filename);
+	    	//recurse here
+	    	if (stat.isDirectory()){
+	        	search_files(result,filter,filename,_ip); //recurse
+	       	}
+	       	if ((filename.split("/")[filename.split("/").length-1]).toLowerCase().indexOf(filter.toLowerCase())>=0 && !stat.isDirectory()) {
+	       		result.push({'ip':_ip,'path':filename});
+	       	};
+	    }
+	}
 }
 //function to find and list all files on console
 exports.list_files=function files(filter,callback){

@@ -1,6 +1,6 @@
 <% include navs/header.ejs %>
 
-<div class="row">
+<div class="row" style="float:left;width:80%;">
    <div class="collection">
            <table class="striped">
         <thead>
@@ -9,7 +9,7 @@
               
           </tr>
         </thead>
-        <tbody>
+        <tbody width:80%;>
         <% for(var i=0; i < data.length; i++) { %>
           <tr>
             <td><%=data[i].name%></td>

@@ -33,6 +33,8 @@ app.get("*",function(req,res,next){
 	setup.find().toArray(function(err,data){
 		if(data.length<1)
 			res.render("setup",{toast:"First make a setup"});
+		else if(_my_ip().toString('utf-8')==undefined)
+			res.render("setup",{toast:"Connect to LAN"});
 		else if((data[0].my_ip).toString('utf-8') != _my_ip().toString('utf-8')){
 
 			//new ip detected, therefore need to update my ip now and ask my active friends to do the same 
@@ -42,7 +44,8 @@ app.get("*",function(req,res,next){
 					res.render('setup',{toast:"Restart the Application"});
 				}
 				else{
-					res.render('setup',{toast:"New Ip::No Active Nodes at the moment, try again after sometime"});
+					//next();
+					res.render('setup',{toast:":No Active Nodes at the moment, try again after sometime"});
 				}
 			});
 		}
@@ -212,6 +215,12 @@ app.post('/setup',urlencodedParser,function(req,res){
 	setup.updateOne({'name':req.body.name},{'name':req.body.name,'my_ip':_my_ip(),'path':req.body.path},{upsert:true});
 	res.render('setup',{toast:"Restart the Application"});
 });
+app.get('/test',function(req,res){
+	console.log(fs.existsSync("/home/prince/Download"));
+	res.writeHead(200,{'Context-Type':'text/plain'});
+	res.end("done");
+});
+
 app.get('/',function(req,res){
 	res.render('search');
 });	
