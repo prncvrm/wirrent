@@ -15,7 +15,7 @@ mongoClient.connect("mongodb://localhost:27017/MyDb", function(err,database){
 	active_friends = database.collection('active_friends');
 	});
 
-var time_gap = 30000;
+var time_gap = 20000;
 
 //lame function lol
 
