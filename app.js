@@ -112,15 +112,15 @@ app.get('/friend_list',function(req,res){
 		});
 	});
 });
-app.get('/video/:path/:name',function(req,res){
-	_data=[(req.connection.remoteAddress).substring(7,(req.connection.remoteAddress).length),req.params.path,req.params.name];
+app.get('/video/:path/:name/:ip',function(req,res){
+	_data=[req.params.ip,req.params.path,req.params.name];
 	res.render('video',{data:_data});
 });
 //video stream
-app.get('/video_stream/:path/:name',function(req,res){
+app.get('/video_stream/:path/:name/:ip',function(req,res){
 	//params as file name to be saved as
 	const path=atob(req.params.path);
-	console.log(path);
+	//console.log(path);
 	//creating a binary file with given name of 0 size
 	const stat = fs.statSync(path);
 	const fileSize = stat.size;
