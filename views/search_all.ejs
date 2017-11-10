@@ -14,9 +14,9 @@
   </form>
 </div>
 <div class="row">
-   <div class="collection">
+   <div class="collection" style="width:80%">
         <% for(var i=0; i < data.length; i++) { %>
-        <a href="//<%=data[i].ip%>:3000/download/<%=data[i].path%>/<%=data[i].file_name%>" class="collection-item"><%=data[i].file_name%></a>
+        <a href="//<%=data[i].ip%>:3000/download/<%=data[i].path%>/<%=data[i].file_name%>" class="collection-item" style="width:80%;float:left;"><%=data[i].file_name%></a><a style="float:left;" href="//<%=data[i].ip%>:3000/download/<%=data[i].path%>/<%=data[i].file_name%>"><i class="small material-icons">ondemand_video</i></a>
         <% } %>
       </div>
 </div>
