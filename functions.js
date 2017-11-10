@@ -138,7 +138,7 @@ exports.add_mutal_friend=function (){
 		});
 }
 function search_files(result,filter,path,_ip){
-	if(fs.openSync(path)){
+	if(fs.exits(path)){
 		var files=fs.readdirSync(path);
 	    for(var i=0;i<files.length;i++){
 	       	var filename=_path.join(path,files[i]);
