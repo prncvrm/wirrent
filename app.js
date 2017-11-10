@@ -117,7 +117,7 @@ app.get('/video/:path/:name/:ip',function(req,res){
 	res.render('video',{data:_data});
 });
 //video stream
-app.get('/video_stream/:path/:name/:ip',function(req,res){
+app.get('/video_stream/:path/:name',function(req,res){
 	//params as file name to be saved as
 	var path=atob(req.params.path);
 	//console.log(path);
