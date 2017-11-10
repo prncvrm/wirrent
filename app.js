@@ -56,6 +56,9 @@ app.get("*",function(req,res,next){
 	});
 
 });
+
+
+
 //nav bar
 app.get('/api/stats',function(req,res){
 	setup.find().toArray(function(err,data){
@@ -108,6 +111,39 @@ app.get('/friend_list',function(req,res){
 		res.status(200).send(data);
 		});
 	});
+});
+//video stream
+app.get('/video_stream/:path/:name',function(req,res){
+	//params as file name to be saved as
+	const path=atob(req.params.path);
+	//creating a binary file with given name of 0 size
+	const stat = fs.statSync(path)
+	const fileSize = stat.size
+	const range = req.headers.range
+  	if (range) {
+    	const parts = range.replace(/bytes=/, "").split("-")
+    	const start = parseInt(parts[0], 10)
+    	const end = parts[1] ? parseInt(parts[1], 10): fileSize-1
+    	const chunksize = (end-start)+1
+    	const file = fs.createReadStream(path, {start, end})
+    	const head = {
+      		'Content-Range': `bytes ${start}-${end}/${fileSize}`,
+      		'Accept-Ranges': 'bytes',
+      		'Content-Length': chunksize,
+      		'Content-Type': 'video/mp4',
+    	}
+    	res.writeHead(206, head);
+    	file.pipe(res);
+  	}
+  	else{
+    	const head = {
+     	 'Content-Length': fileSize,
+      	'Content-Type': 'video/mp4',
+    }
+    res.writeHead(200, head);
+    fs.createReadStream(path).pipe(res);
+  }
+	
 });
 app.get('/add_mutal_friend',function(req,res){
 	func.add_mutal_friend();
@@ -172,7 +208,7 @@ app.get('/download/:path/:name',function(req,res){
 //	var downloadFile=fs.createWriteStream(fileName,{'flags':'a'});
 	//calling download chunks function
 ///	download_chunks(paths[0],downloadFile);
-	res.setHeader('Content-disposition', 'attachment; filename=' + req.params.name);7
+	res.setHeader('Content-disposition', 'attachment; filename=' + req.params.name);
 	var fileStream = fs.createReadStream(file_path);
 	fileStream.pipe(res);
 	res.writeHead(200,{'Context-Type':'text/plain'});

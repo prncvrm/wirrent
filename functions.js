@@ -97,6 +97,9 @@ exports.update_active_friends=function (){
 			}
 		});		
 }
+
+//video export
+
 exports.add_mutal_friend=function (){
 	friends.find().toArray(function(err,data){
 			if(err)
@@ -135,7 +138,7 @@ exports.add_mutal_friend=function (){
 		});
 }
 function search_files(result,filter,path,_ip){
-	if(_path.exitsSync(path)){
+	if(fs.openSync(path)){
 		var files=fs.readdirSync(path);
 	    for(var i=0;i<files.length;i++){
 	       	var filename=_path.join(path,files[i]);
