@@ -113,17 +113,18 @@ app.get('/friend_list',function(req,res){
 	});
 });
 app.get('/video/:path/:name',function(req,res){
-	//console.log([req.params.path,req.params.name]);
-	res.render('video');
+	_data=[req.params.path,req.params.name];
+	res.render('video',{data:_data});
 });
 //video stream
 app.get('/video_stream/:path/:name',function(req,res){
 	//params as file name to be saved as
 	const path=atob(req.params.path);
+	console.log(path);
 	//creating a binary file with given name of 0 size
-	const stat = fs.statSync(path)
-	const fileSize = stat.size
-	const range = req.headers.range
+	const stat = fs.statSync(path);
+	const fileSize = stat.size;
+	const range = req.headers.range;
   	if (range) {
     	const parts = range.replace(/bytes=/, "").split("-")
     	const start = parseInt(parts[0], 10)
