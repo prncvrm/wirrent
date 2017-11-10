@@ -113,7 +113,7 @@ app.get('/friend_list',function(req,res){
 	});
 });
 app.get('/video/:path/:name',function(req,res){
-	_data=[req.params.path,req.params.name];
+	_data=[req.connection.remoteAddress,req.params.path,req.params.name];
 	res.render('video',{data:_data});
 });
 //video stream
