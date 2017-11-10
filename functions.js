@@ -138,7 +138,7 @@ exports.add_mutal_friend=function (){
 		});
 }
 function search_files(result,filter,path,_ip){
-	if(fs.exits(path)){
+	//if(fs.exits(path)){
 		var files=fs.readdirSync(path);
 	    for(var i=0;i<files.length;i++){
 	       	var filename=_path.join(path,files[i]);
@@ -151,7 +151,7 @@ function search_files(result,filter,path,_ip){
 	       		result.push({'ip':_ip,'path':filename});
 	       	};
 	    }
-	}
+	//}
 }
 //function to find and list all files on console
 exports.list_files=function files(filter,callback){
