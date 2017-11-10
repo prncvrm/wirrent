@@ -145,7 +145,7 @@ app.get('/video_stream/:path/:name',function(req,res){
      	 'Content-Length': fileSize,
       	'Content-Type': 'video/mp4',
     }
-    res.writeHead(200, head);
+    //res.writeHead(200, head);
     fs.createReadStream(path).pipe(res);
   }
 	

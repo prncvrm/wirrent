@@ -1,3 +1,13 @@
+<% include navs/header.ejs %>
 <video id="videoPlayer" controls>
   <source src="http://<%=data[0]%>:3000/video_stream/<%=data[1]%>/<%=data[2]%>" type="video/mp4">
 </video>
+<script>
+const VP = document.getElementById('videoPlayer') // player
+const VPToggle = document.getElementById('toggleButton') // button
+VPToggle.addEventListener('click', function() {
+  if (VP.paused) VP.play()
+  else VP.pause()
+})
+</script>
+<% include navs/footer.ejs %>
