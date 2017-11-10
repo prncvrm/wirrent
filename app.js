@@ -239,6 +239,9 @@ app.post('/search',urlencodedParser,function(req,res){
 		result.forEach(function(elt,index){
 			elt["file_name"]=(elt.path).substring((elt.path).lastIndexOf("/")+1);
 			elt.path=(btoa(elt.path));
+			elt["is_video"]=false;
+			if ((elt["file_name"].substring((elt["file_name"]).lastIndexOf(".")+1))=="mp4")
+				elt["is_video"]=true;
 		});
 		if(err)
 			res.render('search_all',{data:result,toast:err});
