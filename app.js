@@ -119,19 +119,19 @@ app.get('/video/:path/:name/:ip',function(req,res){
 //video stream
 app.get('/video_stream/:path/:name/:ip',function(req,res){
 	//params as file name to be saved as
-	const path=atob(req.params.path);
+	var path=atob(req.params.path);
 	//console.log(path);
 	//creating a binary file with given name of 0 size
-	const stat = fs.statSync(path);
-	const fileSize = stat.size;
-	const range = req.headers.range;
+	var stat = fs.statSync(path);
+	var fileSize = stat.size;
+	var range = req.headers.range;
   	if (range) {
-    	const parts = range.replace(/bytes=/, "").split("-")
-    	const start = parseInt(parts[0], 10)
-    	const end = parts[1] ? parseInt(parts[1], 10): fileSize-1
-    	const chunksize = (end-start)+1
-    	const file = fs.createReadStream(path, {start, end})
-    	const head = {
+    	var parts = range.replace(/bytes=/, "").split("-")
+    	var start = parseInt(parts[0], 10)
+    	var end = parts[1] ? parseInt(parts[1], 10): fileSize-1
+    	var chunksize = (end-start)+1
+    	var file = fs.createReadStream(path, {start, end})
+    	var head = {
       		'Content-Range': `bytes ${start}-${end}/${fileSize}`,
       		'Accept-Ranges': 'bytes',
       		'Content-Length': chunksize,
@@ -141,14 +141,13 @@ app.get('/video_stream/:path/:name/:ip',function(req,res){
     	file.pipe(res);
   	}
   	else{
-    	const head = {
+    	var head = {
      	 'Content-Length': fileSize,
       	'Content-Type': 'video/mp4',
-    }
-    //res.writeHead(200, head);
-    fs.createReadStream(path).pipe(res);
-  }
-	
+    	}
+    	res.writeHead(200, head);
+    	fs.createReadStream(path).pipe(res);
+  	}
 });
 app.get('/add_mutal_friend',function(req,res){
 	func.add_mutal_friend();
