@@ -18,7 +18,7 @@
         <% for(var i=0; i < data.length; i++) { %>
         <a href="//<%=data[i].ip%>:3000/download/<%=data[i].path%>/<%=data[i].file_name%>" class="collection-item" style="width:80%;float:left;"><%=data[i].file_name%></a>
         <% if(data[i].is_video){ %>
-        <a style="float:left;" href="//localhost:3000/video/<%=data[i].path%>/<%=data[i].file_name%>"><i class="small material-icons">ondemand_video</i></a>
+        <a style="float:left;" href="//localhost:3000/video_stream/<%=data[i].path%>/<%=data[i].file_name%>"><i class="small material-icons">ondemand_video</i></a>
         <% } %>
         <% } %>
       </div>
